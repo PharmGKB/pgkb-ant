@@ -1,7 +1,5 @@
 plugins {
   id 'java'
-  id 'jacoco'
-  id 'com.github.kt3k.coveralls' version '2.6.3'
   id 'osgi'
   id 'signing'
   id 'com.jfrog.bintray' version '1.6'
@@ -32,7 +30,7 @@ project.version = getVersionName()
 archivesBaseName = "pgkb-ant"
 
 ext {
-  description = 'PharmGKB-specific ant tasks.'
+  description = 'PharmGKB ant tasks.'
   url = 'https://github.com/PharmGKB/pgkb-ant.git'
   scm = 'scm:git@github.com:PharmGKB/pgkb-ant.git'
   orgName = 'PharmGKB'
@@ -59,14 +57,6 @@ dependencies {
 task printVersion {
   doLast {
     println project.version
-  }
-}
-
-
-jacocoTestReport {
-  reports {
-    xml.enabled = true // coveralls plugin depends on xml format report
-    html.enabled = true
   }
 }
 
