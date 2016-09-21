@@ -1,0 +1,24 @@
+# IntelliJ files
+/.idea/libraries/Gradle__*.xml
+/.idea/dictionaries/
+/.idea/gradle.xml
+/.idea/modules/
+/.idea/modules.xml
+/.idea/scssLintPlugin.xml
+/.idea/shelf/
+/.idea/workspace.xml
+/.idea/watcherTasks.xml
+
+# External tools
+.gradle/
+/bower_components/
+/node_modules/
+
+# Temporary files
+.DS_Store
+._.DS_Store
+*~
+/build/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
