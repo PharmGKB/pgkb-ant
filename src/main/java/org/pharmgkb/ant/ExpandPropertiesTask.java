@@ -2,6 +2,7 @@ package org.pharmgkb.ant;
 
 import java.util.Map;
 import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 
 
@@ -19,27 +20,13 @@ public class ExpandPropertiesTask extends Task {
 
   public void execute() throws BuildException {
 
-    Map<String, Object> map = getProject().getProperties();
+    Project project = getProject();
+    Map<String, Object> map = project.getProperties();
     for (String key : map.keySet()) {
       String value = (String)map.get(key);
-
-      int endIdx = value.indexOf("}");
-      while (endIdx != -1) {
-        int startIdx = value.lastIndexOf("${", endIdx);
-        if (startIdx == -1) {
-          throw new BuildException("Found '}' but cannot find matching '${' while trying to expand '" + key + "': '" + value + "'");
-        }
-        String prop = value.substring(startIdx, endIdx);
-        String subKey = prop.substring(2);
-        String subValue = (String)getProject().getProperties().get(subKey);
-        if (subValue == null) {
-          throw new BuildException("Cannot find value for '" + subKey + "' in key '" + key + "'");
-        } else if (subValue.contains("${" + subKey + "}")) {
-          throw new BuildException("Recursive keys: [" + key + "] --> [" + subKey + "] --> [" + subValue + "]");
-        }
-        value = value.substring(0, startIdx) + subValue + value.substring(endIdx + 1);
-        getProject().setUserProperty(key, value);
-        endIdx = value.indexOf("}");
+      String newValue = ExpandPropertyTask.resolveValue(project, key, value);
+      if (!value.equals(newValue)) {
+        project.setUserProperty(key, newValue);
       }
     }
   }
