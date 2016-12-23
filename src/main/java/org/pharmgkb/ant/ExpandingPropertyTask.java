@@ -8,10 +8,21 @@ import org.apache.tools.ant.taskdefs.Property;
 /**
  * This task expands the value based on existing user properties.  This allows embedding multiple/nested properties such
  * as: {@code value="${scheme}://${server.${name}}/${path}"}.
+ * <p>
+ * This behavior is only applied to properties set via the {@code value} attribute.
+ * <p>
+ * This also allows properties to be overriden via the {@code override} attribute.  This assumes that the message is a
+ * user property set.
  *
  * @author Mark Woon
  */
 public class ExpandingPropertyTask extends Property {
+  private boolean m_override;
+
+
+  public void setOverride(boolean override) {
+    m_override = override;
+  }
 
 
   @Override
@@ -19,7 +30,11 @@ public class ExpandingPropertyTask extends Property {
     if (getValue() != null) {
       setValue(resolveValue(getProject(), getName(), getValue()));
     }
-    super.execute();
+    if (m_override) {
+      getProject().setUserProperty(getName(), getValue());
+    } else {
+      super.execute();
+    }
   }
 
 

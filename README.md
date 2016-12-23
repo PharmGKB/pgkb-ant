@@ -18,10 +18,12 @@ This task should be called after all properties have been read/created.
 
 ##### ExpandingPropertyTask
 
-This is a drop-in replacement for `<property>` with supports property expansion.
+This is a drop-in replacement for `<property>` with supports property expansion (when set using the `value` attribute).
 
 Example:
 
 ```
 <property name="url" value="${scheme}://${server.${name}}/${path}" />
 ```
+
+This also adds an `override` attribute (defaults to false) that allows the value of a property to be overridden.
