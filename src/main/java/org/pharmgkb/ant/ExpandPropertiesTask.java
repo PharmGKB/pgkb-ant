@@ -24,7 +24,7 @@ public class ExpandPropertiesTask extends Task {
     Map<String, Object> map = project.getProperties();
     for (String key : map.keySet()) {
       String value = (String)map.get(key);
-      String newValue = ExpandPropertyTask.resolveValue(project, key, value);
+      String newValue = ExpandingPropertyTask.resolveValue(project, key, value);
       if (!value.equals(newValue)) {
         project.setUserProperty(key, newValue);
       }

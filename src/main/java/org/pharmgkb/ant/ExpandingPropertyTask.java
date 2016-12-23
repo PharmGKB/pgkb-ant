@@ -11,7 +11,7 @@ import org.apache.tools.ant.taskdefs.Property;
  *
  * @author Mark Woon
  */
-public class ExpandPropertyTask extends Property {
+public class ExpandingPropertyTask extends Property {
 
 
   @Override

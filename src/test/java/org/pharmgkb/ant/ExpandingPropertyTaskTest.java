@@ -8,11 +8,11 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * This is a JUnit test for {@link ExpandPropertyTask}.
+ * This is a JUnit test for {@link ExpandingPropertyTask}.
  *
  * @author Mark Woon
  */
-public class ExpandPropertyTaskTest {
+public class ExpandingPropertyTaskTest {
   private Project m_project;
 
   @Before
@@ -28,7 +28,7 @@ public class ExpandPropertyTaskTest {
   @Test
   public void testResolveValue() {
 
-    String value = ExpandPropertyTask.resolveValue(m_project, "key", "${scheme}://${server.${name}}/${path}");
+    String value = ExpandingPropertyTask.resolveValue(m_project, "key", "${scheme}://${server.${name}}/${path}");
     assertEquals("https://www.pharmgkb.org/some/path", value);
   }
 
@@ -36,7 +36,7 @@ public class ExpandPropertyTaskTest {
   @Test
   public void testTask() {
 
-    ExpandPropertyTask task = new ExpandPropertyTask();
+    ExpandingPropertyTask task = new ExpandingPropertyTask();
     task.setProject(m_project);
     task.setName("key");
     task.setValue("${scheme}://${server.${name}}/${path}");
