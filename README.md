@@ -14,3 +14,12 @@ url = ${scheme}://${server.${name}}/${path}
 ```
 
 This task should be called after all properties have been read/created.
+
+
+##### ExpandPropertyTask
+
+This is a drop-in replacement for `<property>` with supports property expansion.
+
+```
+<property name="url" value="${scheme}://${server.${name}}/${path}" />
+```
