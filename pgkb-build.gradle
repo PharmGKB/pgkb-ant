@@ -119,38 +119,35 @@ publishing {
       artifact javadocJar
       artifact sourcesJar
 
-      pom.withXml {
-        asNode().children().last() + {
-          resolveStrategy = Closure.DELEGATE_FIRST
-          name project.name
-          packaging 'jar'
-          description project.ext.description
-          url project.ext.url
-          scm {
-            url project.ext.url
-            connection project.ext.scm
-            developerConnection project.ext.scm
+      pom {
+        name = project.name
+        description = project.ext.description
+        url = project.ext.url
+        packaging = 'jar'
+        scm {
+          url = project.ext.url
+          connection = project.ext.scm
+          developerConnection = project.ext.scm
+        }
+        licenses {
+          license {
+            name = 'MPL 2.0'
+            url = 'http://mozilla.org/MPL/2.0/'
+            distribution = 'repo'
           }
-          licenses {
-            license {
-              name 'MPL 2.0'
-              url 'http://mozilla.org/MPL/2.0/'
-              distribution 'repo'
-            }
+        }
+        organization {
+          name = project.ext.orgName
+          url = project.ext.orgUrl
+        }
+        developers {
+          developer {
+            id = 'markwoon'
+            name = 'Mark Woon'
           }
-          organization {
-            name project.ext.orgName
-            url project.ext.orgUrl
-          }
-          developers {
-            developer {
-              id 'markwoon'
-              name 'Mark Woon'
-            }
-            developer {
-              id 'whaleyr'
-              name 'Ryan Whaley'
-            }
+          developer {
+            id = 'whaleyr'
+            name = 'Ryan Whaley'
           }
         }
       }
