@@ -42,6 +42,7 @@ project.version = getVersionName()
 
 ext {
   baseName = "pgkb-ant"
+  moduleName = 'org.pharmgkb.ant'
   description = 'PharmGKB ant tasks.'
   url = 'https://github.com/PharmGKB/' + project.ext.baseName + '.git'
   scm = 'scm:git@github.com:PharmGKB/' + project.ext.baseName + '.git'
