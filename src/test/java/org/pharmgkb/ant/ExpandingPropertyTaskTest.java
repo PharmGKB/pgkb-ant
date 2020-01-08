@@ -1,10 +1,10 @@
 package org.pharmgkb.ant;
 
 import org.apache.tools.ant.Project;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class ExpandingPropertyTaskTest {
   private Project m_project;
 
-  @Before
+  @BeforeEach
   public void setup() {
     m_project = new Project();
     m_project.setUserProperty("scheme", "https");

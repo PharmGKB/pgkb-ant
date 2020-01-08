@@ -8,7 +8,7 @@ buildscript {
 }
 
 plugins {
-  id 'java'
+  id 'java-library'
   id 'jacoco'
   id 'com.github.kt3k.coveralls' version '2.8.2'
   id 'signing'
@@ -35,8 +35,8 @@ def getVersionName() {
   }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 project.group = 'org.pharmgkb'
 project.version = getVersionName()
 
@@ -62,9 +62,11 @@ repositories {
 }
 
 dependencies {
-  compile group: 'org.apache.ant', name: 'ant', version: '1.10.5'
-  compile group: 'org.apache.ant', name: 'ant-junit', version: '1.10.5'
-  compile group: 'junit', name: 'junit', version: '4.12'
+  api group: 'org.apache.ant', name: 'ant', version: '1.10.7'
+  api group: 'org.apache.ant', name: 'ant-junit', version: '1.10.7'
+  api group: 'org.apache.ant', name: 'ant-junitlauncher', version: '1.10.7'
+
+  testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.5.2'
 }
 
 apply from: 'pgkb-build.gradle'
