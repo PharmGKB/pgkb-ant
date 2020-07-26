@@ -45,7 +45,7 @@ public class JupiterResultFormatter implements TestResultFormatter {
   private TestPlan m_currentTestPlan;
   private StringWriter m_testResults;
   private PrintWriter m_testPrinter;
-  private Map<String, TestClassStats> m_testedClasses = new HashMap<>();
+  private final Map<String, TestClassStats> m_testedClasses = new HashMap<>();
 
 
 
@@ -211,8 +211,8 @@ public class JupiterResultFormatter implements TestResultFormatter {
     private int m_succeeded;
     private int m_aborted;
     private int m_failed;
-    private Instant m_started = Instant.now();
-    private StringWriter m_buffer = new StringWriter();
+    private final Instant m_started = Instant.now();
+    private final StringWriter m_buffer = new StringWriter();
 
     TestClassStats(String className) {
       this.className = className;
