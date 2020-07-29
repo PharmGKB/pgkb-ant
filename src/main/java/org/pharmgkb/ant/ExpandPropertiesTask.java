@@ -24,9 +24,13 @@ public class ExpandPropertiesTask extends Task {
     Map<String, Object> map = project.getProperties();
     for (String key : map.keySet()) {
       String value = (String)map.get(key);
-      String newValue = ExpandingPropertyTask.resolveValue(project, key, value);
-      if (!value.equals(newValue)) {
-        project.setUserProperty(key, newValue);
+      try {
+        String newValue = ExpandingPropertyTask.resolveValue(project, key, value);
+        if (!value.equals(newValue)) {
+          project.setUserProperty(key, newValue);
+        }
+      } catch (BuildException ex) {
+        throw new BuildException("Error evaluating " + key + "='" + value + "' (" + ex.getMessage() + ")", ex);
       }
     }
   }
