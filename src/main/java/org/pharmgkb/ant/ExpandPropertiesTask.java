@@ -23,6 +23,9 @@ public class ExpandPropertiesTask extends Task {
     Project project = getProject();
     Map<String, Object> map = project.getProperties();
     for (String key : map.keySet()) {
+      if (key.startsWith("env.BASH_FUNC_")) {
+        continue;
+      }
       String value = (String)map.get(key);
       try {
         String newValue = ExpandingPropertyTask.resolveValue(project, key, value);
