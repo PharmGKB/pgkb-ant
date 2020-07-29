@@ -1,3 +1,10 @@
+### [3.1.2](https://github.com/PharmGKB/pgkb-ant/compare/v3.1.1...v3.1.2) (2020-07-29)
+
+
+### Bug Fixes
+
+* ignore environment variables starting with BASH_FUNC_* ([ebcc186](https://github.com/PharmGKB/pgkb-ant/commit/ebcc186aefffd2278122cc393022b6166bdf9fb6))
+
 ### [3.1.1](https://github.com/PharmGKB/pgkb-ant/compare/v3.1.0...v3.1.1) (2020-07-29)
 
 
