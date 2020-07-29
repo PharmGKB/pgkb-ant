@@ -1,3 +1,10 @@
+### [3.1.1](https://github.com/PharmGKB/pgkb-ant/compare/v3.1.0...v3.1.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* improve error message ([377f6fd](https://github.com/PharmGKB/pgkb-ant/commit/377f6fdba4629b44f02b0967636ae55dbec86c31))
+
 ## [3.1.0](https://github.com/PharmGKB/pgkb-ant/compare/v3.0.0...v3.1.0) (2020-07-26)
 
 
