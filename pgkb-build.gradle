@@ -18,7 +18,7 @@ test {
   testLogging {
     // set options for log level LIFECYCLE
     events 'passed', 'skipped', 'failed'
-    exceptionFormat 'short'
+    exceptionFormat = 'short'
 
     // remove standard output/error logging from --info builds
     // by assigning only 'failed' and 'skipped' events
@@ -28,13 +28,18 @@ test {
     debug.events = ['started', 'passed', 'skipped', 'failed']
     debug.exceptionFormat = 'full'
   }
+
+  // always generate reports after tests are run
+  finalizedBy jacocoTestReport
 }
 
 
 jacocoTestReport {
+  // tests must be run before generating the report
+  dependsOn test
   reports {
-    xml.enabled = true // coveralls plugin depends on xml format report
-    html.enabled = true
+    xml.required = true // codecov depends on xml format report
+    html.required = true
   }
 }
 
@@ -71,50 +76,28 @@ artifacts {
 }
 
 signing {
+  if (project.ext.has('signing.key')) {
+    useInMemoryPgpKeys(project.ext['signing.key'], project.ext['signing.password'])
+  }
   sign jar
   sign javadocJar
   sign sourcesJar
+  sign publishing.publications
 }
 
 
-bintray {
-  user = project.ext.bintrayUser
-  key = project.ext.bintrayKey
-  publications = [ 'PgkbPublication' ]
-  dryRun = false
-  publish = true
-
-  pkg {
-    repo = 'maven'
-    name = project.name
-    desc = project.ext.description
-    userOrg = 'pharmgkb'
-    licenses = [ 'MPL-2.0' ]
-    issueTrackerUrl = project.ext.url + '/issues'
-    vcsUrl = project.ext.url
-    githubRepo = 'PharmGKB/' + project.ext.baseName
-
-    version {
-      name = project.version
-      vcsTag = 'v' + project.version
-      gpg {
-        sign = true
-        passphrase = project.ext.gpgPwd
-      }
-      mavenCentralSync {
-        sync = true
-        user = project.ext.sonatypeUser
-        password = project.ext.sonatypePwd
-        close = '1'
-      }
+nexusPublishing {
+  repositories {
+    sonatype {
+      username = project.ext.sonatypeUser
+      password = project.ext.sonatypePwd
     }
   }
 }
 
-
 publishing {
   publications {
-    PgkbPublication(MavenPublication) {
+    release(MavenPublication) {
       from components.java
       artifact javadocJar
       artifact sourcesJar
@@ -132,7 +115,7 @@ publishing {
         licenses {
           license {
             name = 'MPL 2.0'
-            url = 'http://mozilla.org/MPL/2.0/'
+            url = 'https://mozilla.org/MPL/2.0/'
             distribution = 'repo'
           }
         }
