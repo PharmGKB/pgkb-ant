@@ -40,6 +40,11 @@ public class ExpandingPropertyTask extends Property {
 
   static String resolveValue(Project project, String key, String value) {
 
+    // don't bother if it starts and ends with {}
+    // example: env.WT_PROFILE_ID, which is set by Windows Terminal
+    if (value.startsWith("{") && value.endsWith("}")) {
+      return value;
+    }
     int endIdx = value.indexOf("}");
     while (endIdx != -1) {
       int startIdx = value.lastIndexOf("${", endIdx);
